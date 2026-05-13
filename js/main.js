@@ -3,14 +3,14 @@
    Scroll reveals, header effects, mobile menu, modal, back-to-top
    ============================================================ */
 
-/* Tab switching logic centralized below */(function () {
+(function () {
   'use strict';
 
   /* ----------------------------------------------------------
      1. PAGE LOADER
   ---------------------------------------------------------- */
   window.addEventListener('load', function () {
-    var loader = document.getElementById('pageLoader');
+    const loader = document.getElementById('pageLoader');
     if (loader) {
       loader.classList.add('hidden');
     }
@@ -19,7 +19,7 @@
   /* ----------------------------------------------------------
      2. HEADER SCROLL EFFECT
   ---------------------------------------------------------- */
-  var header = document.getElementById('siteHeader');
+  const header = document.getElementById('siteHeader');
 
   function onScroll() {
     if (!header) return;
@@ -36,8 +36,8 @@
   /* ----------------------------------------------------------
      3. MOBILE MENU TOGGLE
   ---------------------------------------------------------- */
-  var menuToggle = document.getElementById('menuToggle');
-  var mainNav = document.getElementById('mainNav');
+  const menuToggle = document.getElementById('menuToggle');
+  const mainNav = document.getElementById('mainNav');
 
   if (menuToggle && mainNav) {
     menuToggle.addEventListener('click', function () {
@@ -57,10 +57,10 @@
   /* ----------------------------------------------------------
      4. SCROLL REVEAL VOXELS & Intersection Observer
   ---------------------------------------------------------- */
-  var revealElements = document.querySelectorAll('.reveal');
+  const revealElements = document.querySelectorAll('.reveal');
 
   if ('IntersectionObserver' in window && revealElements.length) {
-    var revealObserver = new IntersectionObserver(
+    const revealObserver = new IntersectionObserver(
       function (entries) {
         entries.forEach(function (entry) {
           if (entry.isIntersecting) {
@@ -86,11 +86,11 @@
      5. STAGGERED CARD ANIMATIONS
   ---------------------------------------------------------- */
   function staggerCards() {
-    var grids = document.querySelectorAll('.skills-grid, .links-grid, .portfolio-grid');
+    const grids = document.querySelectorAll('.skills-grid, .links-grid, .portfolio-grid');
 
     grids.forEach(function (grid) {
-      var cards = grid.children;
-      var gridObserver = new IntersectionObserver(
+      const cards = grid.children;
+      const gridObserver = new IntersectionObserver(
         function (entries) {
           entries.forEach(function (entry) {
             if (entry.isIntersecting) {
@@ -125,8 +125,8 @@
      6. IMAGE MODAL (portfolio page)
   ---------------------------------------------------------- */
   window.openModal = function (imgSrc) {
-    var modal = document.getElementById('myModal');
-    var modalImg = document.getElementById('img01');
+    const modal = document.getElementById('myModal');
+    const modalImg = document.getElementById('img01');
     if (!modal || !modalImg) return;
 
     modal.style.display = 'block';
@@ -146,7 +146,7 @@
   // Close modal on Escape
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') {
-      var modal = document.getElementById('myModal');
+      const modal = document.getElementById('myModal');
       if (modal && modal.style.display === 'block') {
         modal.style.display = 'none';
         document.body.style.overflow = '';
@@ -157,7 +157,7 @@
   /* ----------------------------------------------------------
      7. BACK TO TOP BUTTON
   ---------------------------------------------------------- */
-  var backToTop = document.getElementById('backToTop');
+  const backToTop = document.getElementById('backToTop');
 
   function toggleBackToTop() {
     if (!backToTop) return;
@@ -178,22 +178,18 @@
   }
 
   /* ----------------------------------------------------------
-     8. TABS LOGIC (Independent containers)
+     8. TABS LOGIC
   ---------------------------------------------------------- */
   window.openTab = function (event, tabName) {
-    var container = event.currentTarget.closest(".tabs-container");
-    if (!container) return;
-    
-    var tabContent = container.getElementsByClassName("tab-content");
-    for (var i = 0; i < tabContent.length; i++) {
+    let i;
+    const tabContent = document.getElementsByClassName("tab-content");
+    for (i = 0; i < tabContent.length; i++) {
       tabContent[i].classList.remove("active");
     }
-    
-    var tabBtns = container.getElementsByClassName("tab-btn");
-    for (var j = 0; j < tabBtns.length; j++) {
-      tabBtns[j].classList.remove("active");
+    const tabBtns = document.getElementsByClassName("tab-btn");
+    for (i = 0; i < tabBtns.length; i++) {
+      tabBtns[i].classList.remove("active");
     }
-    
     document.getElementById(tabName).classList.add("active");
     event.currentTarget.classList.add("active");
   };
@@ -201,13 +197,13 @@
   /* ----------------------------------------------------------
      9. TILT EFFECT ON PROFILE IMAGE
   ---------------------------------------------------------- */
-  var profileImg = document.querySelector('.profile-img');
+  const profileImg = document.querySelector('.profile-img');
 
   if (profileImg) {
     profileImg.addEventListener('mousemove', function (e) {
-      var rect = profileImg.getBoundingClientRect();
-      var x = (e.clientX - rect.left) / rect.width - 0.5;
-      var y = (e.clientY - rect.top) / rect.height - 0.5;
+      const rect = profileImg.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
       profileImg.style.transform = 'scale(1.04) rotateY(' + (x * 8) + 'deg) rotateX(' + (-y * 8) + 'deg)';
     });
 
@@ -219,16 +215,16 @@
   /* ----------------------------------------------------------
      9. TYPING ANIMATION
   ---------------------------------------------------------- */
-  var typingEl = document.getElementById('typingText');
-  var typingRoles = ["Technical Artist", "Software Developer"]; // Mantener siempre en inglés según preferencia del usuario
-  var roleIndex = 0;
-  var charIndex = 0;
-  var isDeleting = false;
-  var typingSpeed = 100;
+  const typingEl = document.getElementById('typingText');
+  let typingRoles = ["Technical Artist", "Software Developer"]; // Mantener siempre en inglés según preferencia del usuario
+  let roleIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+  let typingSpeed = 100;
 
   if (typingEl) {
     function type() {
-      var current = typingRoles[roleIndex];
+      const current = typingRoles[roleIndex];
 
       if (isDeleting) {
         typingEl.textContent = current.substring(0, charIndex - 1);
@@ -238,7 +234,7 @@
         charIndex++;
       }
 
-      var delay = typingSpeed;
+      let delay = typingSpeed;
 
       if (!isDeleting && charIndex === current.length) {
         delay = 2000; // pause at full word
@@ -262,12 +258,12 @@
   /* ----------------------------------------------------------
      10. INTERACTIVE PARTICLE BACKGROUND
   ---------------------------------------------------------- */
-  var canvas = document.getElementById('particleCanvas');
+  const canvas = document.getElementById('particleCanvas');
   if (canvas) {
-    var ctx = canvas.getContext('2d');
-    var particles = [];
-    var particleCount = 80;
-    var mouse = { x: null, y: null, radius: 100 };
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    const particleCount = 80;
+    const mouse = { x: null, y: null, radius: 100 };
 
     function resizeCanvas() {
       canvas.width = window.innerWidth;
@@ -288,14 +284,14 @@
     });
 
     // Handle scroll offset
-    var scrollY = window.scrollY;
+    let scrollY = window.scrollY;
     window.addEventListener('scroll', function() {
-      var currentScroll = window.scrollY;
-      var scrollDiff = currentScroll - scrollY;
+      const currentScroll = window.scrollY;
+      const scrollDiff = currentScroll - scrollY;
       scrollY = currentScroll;
       
       // Move particles with scroll
-      for(var i = 0; i < particles.length; i++) {
+      for(let i = 0; i < particles.length; i++) {
         particles[i].y -= scrollDiff * 0.3; // Parallax effect
         
         // Wrap around vertically
@@ -321,7 +317,7 @@
       draw() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-        ctx.fillStyle = 'rgba(56, 189, 248, 0.4)';
+        ctx.fillStyle = 'rgba(0, 255, 65, 0.4)';
         ctx.fill();
       }
 
@@ -377,7 +373,7 @@
             + ((particles[a].y - particles[b].y) * (particles[a].y - particles[b].y));
           if (distance < (canvas.width / 10) * (canvas.height / 10)) {
             let opacityValue = 1 - (distance / 20000);
-            ctx.strokeStyle = 'rgba(56, 189, 248,' + opacityValue * 0.3 + ')';
+            ctx.strokeStyle = 'rgba(0, 255, 65,' + opacityValue * 0.3 + ')';
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(particles[a].x, particles[a].y);
@@ -510,5 +506,137 @@
         e.preventDefault();
         container.click();
       }
+    });
+  });
+
+  /* ----------------------------------------------------------
+     13. LANGUAGE TRANSLATION ENGINE (UNIVERSAL)
+  ---------------------------------------------------------- */
+  const translations = {
+    es: {
+      navHome: "Inicio",
+      navPortfolio: "Portafolio",
+      navContact: "Contacto",
+      subtitle: "Technical Artist",
+      aboutText: "Technical Artist con experiencia creando recursos 3D, entornos para Arquitectura, publicidad y diversas industrias. Actualmente ampliando mi perfil en desarrollo de software, combinando arte y código para ofrecer soluciones completas.",
+      tabExperience: "Experiencia",
+      tabEducation: "Educación",
+      expEmmanuel: "Renders variados estilo low-poly para artista panameño.",
+      expOrthodontic: "Modelado y Renderizado de piezas dentales.",
+      eduSenati: "Desarrollo de Software",
+      eduIsil: "Animación Digital y Diseño 3D",
+      titleProjects: "Proyectos Destacados",
+      titleTrayectoria: "Trayectoria",
+      skillsTitle: "Habilidades",
+      skillModeling: "Modelado High & Low Poly",
+      skillOptimization: "Optimización de Rendimiento en Tiempo Real",
+      skillProcedural: "Creación de Contenido Procedural",
+      skillMaterials: "Materiales y Shaders",
+      skillPBR: "Texturizado PBR",
+      skillLighting: "Iluminación de Escenas",
+      skillVFX: "Simulaciones de Fluidos y VFX",
+      skillPost: "Postproducción",
+      skillCAD: "Modelado CAD",
+      skillScripting: "Scripting y Programación",
+      softwareTitle: "Software & Tecnologías",
+      catDev: "Lenguajes de Programación",
+      catGames: "Motores de Videojuegos",
+      cat3D: "Modelado y Escultura 3D",
+      catTexturing: "Texturizado",
+      catRender: "Motores de Render",
+      catVFX: "VFX y Simulación",
+      catPost: "Postproducción y Diseño",
+      contactTitle: "Contacto",
+      contactIntro: "¿Tienes un proyecto en mente? Escríbeme y hablemos.",
+      labelName: "Nombre",
+      placeholderName: "Tu nombre",
+      labelEmail: "Correo Electrónico",
+      placeholderEmail: "tu@email.com",
+      labelMessage: "Mensaje",
+      placeholderMessage: "Cuéntame sobre tu proyecto...",
+      submitBtn: "Enviar mensaje",
+      footerRights: "© 2026 Christian Mora Damian. Todos los derechos reservados.",
+      typingRoles: ["Technical Artist", "Software Developer"]
+    },
+    en: {
+      navHome: "Home",
+      navPortfolio: "Portfolio",
+      navContact: "Contact",
+      subtitle: "Technical Artist",
+      aboutText: "Technical Artist with experience creating 3D assets and environments for Architecture, advertising, and various industries. Currently expanding my profile in software development, combining art and code to deliver complete solutions.",
+      tabExperience: "Experience",
+      tabEducation: "Education",
+      expEmmanuel: "Various low-poly style renders for Panamanian artist.",
+      expOrthodontic: "Modeling and Rendering of dental pieces.",
+      eduSenati: "Software Development",
+      eduIsil: "Digital Animation and 3D Design",
+      titleProjects: "Featured Projects",
+      titleTrayectoria: "Journey",
+      skillsTitle: "Technical Skills",
+      skillModeling: "High & Low Poly Modeling",
+      skillOptimization: "Realtime Performance Optimization",
+      skillProcedural: "Procedural Content Creation",
+      skillMaterials: "Materials & Shaders",
+      skillPBR: "PBR Texturing",
+      skillLighting: "Scene Lighting",
+      skillVFX: "Fluid Simulations & VFX",
+      skillPost: "Post-production",
+      skillCAD: "CAD Modeling",
+      skillScripting: "Scripting & Programming",
+      softwareTitle: "Software & Technology",
+      catDev: "Development Languages",
+      catGames: "Game Engines",
+      cat3D: "3D Modeling & Sculpting",
+      catTexturing: "Texturing",
+      catRender: "Render Engines",
+      catVFX: "VFX & Simulation",
+      catPost: "Post-production & Design",
+      contactTitle: "Contact Me",
+      contactIntro: "Have a project in mind? Write to me and let's talk.",
+      labelName: "Name",
+      placeholderName: "Your name",
+      labelEmail: "Email Address",
+      placeholderEmail: "your@email.com",
+      labelMessage: "Message",
+      placeholderMessage: "Tell me about your project...",
+      submitBtn: "Send Message",
+      footerRights: "© 2026 Christian Mora Damian. All rights reserved.",
+      typingRoles: ["Technical Artist", "Software Developer"]
+    }
+  };
+
+  const langBtns = document.querySelectorAll('.lang-btn');
+  
+  function applyTranslations(lang) {
+    const t = translations[lang];
+    if (!t) return;
+
+    // Translate all elements with data-i18n attribute
+    const elements = document.querySelectorAll('[data-i18n]');
+    elements.forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (t[key]) {
+        // Special handle for placeholders
+        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+          el.setAttribute('placeholder', t[key]);
+        } else {
+          el.textContent = t[key];
+        }
+      }
+    });
+
+    // Sync typing roles
+    if (t.typingRoles) {
+      typingRoles = t.typingRoles;
+    }
+  }
+
+  langBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      langBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const lang = btn.getAttribute('data-lang');
+      applyTranslations(lang);
     });
   });
