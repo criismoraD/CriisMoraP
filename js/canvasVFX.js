@@ -15,8 +15,9 @@
     let combo = 0;
     let lastClick = 0;
 
-    const COLORES = [[0, 255, 65], [0, 150, 70], [20, 130, 50]];
-    const COLORES_OVERDRIVE = [[0, 255, 65], [255, 255, 255]];
+    // Paleta Premium (Cian y Violeta)
+    const COLORES = [[56, 189, 248], [167, 139, 250], [10, 150, 200]];
+    const COLORES_OVERDRIVE = [[56, 189, 248], [167, 139, 250], [255, 255, 255]];
 
     window.addEventListener('resize', function() {
         w = canvas.width = window.innerWidth;
@@ -115,7 +116,7 @@
             
             if (p.overdrive) {
                 ctx.shadowBlur = 10;
-                ctx.shadowColor = 'rgba(0, 255, 65, 0.8)';
+                ctx.shadowColor = 'rgba(56, 189, 248, 0.8)';
             } else {
                 ctx.shadowBlur = 0;
             }

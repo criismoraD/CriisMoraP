@@ -181,15 +181,19 @@
      8. TABS LOGIC
   ---------------------------------------------------------- */
   window.openTab = function (event, tabName) {
-    let i;
-    const tabContent = document.getElementsByClassName("tab-content");
-    for (i = 0; i < tabContent.length; i++) {
-      tabContent[i].classList.remove("active");
-    }
-    const tabBtns = document.getElementsByClassName("tab-btn");
-    for (i = 0; i < tabBtns.length; i++) {
-      tabBtns[i].classList.remove("active");
-    }
+    // 1. Encontrar el contenedor más cercano para no afectar otras secciones
+    const container = event.currentTarget.closest(".tabs-container");
+    if (!container) return;
+
+    // 2. Desactivar el contenido activo solo en este contenedor
+    const tabContents = container.querySelectorAll(".tab-content");
+    tabContents.forEach((el) => el.classList.remove("active"));
+
+    // 3. Desactivar el botón activo solo en este contenedor
+    const tabBtns = container.querySelectorAll(".tab-btn");
+    tabBtns.forEach((btn) => btn.classList.remove("active"));
+
+    // 4. Activar el contenido y el botón seleccionados
     document.getElementById(tabName).classList.add("active");
     event.currentTarget.classList.add("active");
   };

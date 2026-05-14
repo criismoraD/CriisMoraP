@@ -1259,12 +1259,16 @@ nav ul li a.active {
 }
 
 .skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
   gap: 0.6rem;
 }
 
 .skill-card {
+  width: 120px;
+  flex-grow: 1;
+  max-width: 140px;
   background: var(--card-bg);
   backdrop-filter: blur(10px);
   padding: 0.85rem 0.5rem;
@@ -1656,7 +1660,6 @@ footer .footer-links a:hover {
   }
 
   .skills-grid {
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
     gap: 0.75rem;
   }
 
@@ -1979,8 +1982,9 @@ nav ul li a .nav-icon {
     width: calc(50% - 3px);
     background: var(--accent-color);
     border-radius: 15px;
-    box-shadow: 0 0 8px rgba(0,255,65,0.4);
+    box-shadow: 0 0 8px rgba(56, 189, 248, 0.4);
     z-index: 0;
+    pointer-events: none;
     transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
   }
 
