@@ -638,8 +638,8 @@ nav ul li a.active {
   .hero-modern {
     flex-direction: column-reverse;
     text-align: center;
-    gap: 3rem;
-    padding: 2rem 0;
+    gap: 1.5rem; /* Reducir espacio entre foto y texto */
+    padding: 1.5rem 0;
   }
   
   .hero-content {
@@ -1961,7 +1961,6 @@ nav ul li a .nav-icon {
   }
 
   /* Switch style lang selector en móvil */
-  /* Switch style lang selector en móvil */
   .lang-selector-header {
     background: rgba(40, 40, 45, 0.6);
     border-radius: 20px;
@@ -1970,6 +1969,7 @@ nav ul li a .nav-icon {
     box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
     position: relative;
     display: flex;
+    pointer-events: none;
   }
 
   /* El bloque deslizante (la luz del switch) */
@@ -2000,7 +2000,8 @@ nav ul li a .nav-icon {
   .lang-selector-header .lang-btn {
     padding: 6px 12px;
     position: relative;
-    z-index: 1;
+    z-index: 10;
+    pointer-events: auto; /* Fuerza clicabilidad en el botón */
     background: transparent !important;
     box-shadow: none !important;
     border-radius: 15px;
