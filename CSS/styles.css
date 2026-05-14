@@ -675,13 +675,15 @@ nav ul li a.active {
 }
 
 @media (max-width: 768px) {
-  .hero-title { font-size: 3rem; }
-  .avatar-container { width: 280px; height: 280px; }
-  .glow-ring { width: 340px; height: 340px; }
-  .badge { padding: 0.5rem 0.8rem; }
-  .badge-title { font-size: 1rem; }
-  .badge-subtitle, .badge span { font-size: 0.65rem; }
+  .hero-title { font-size: 2.4rem; }
+  .avatar-container { width: 220px; height: 220px; }
+  .glow-ring { width: 270px; height: 270px; }
+  /* Ocultar badges flotantes en móvil — generan espacio extra */
+  .badge { display: none; }
   .stat-item { width: 100%; }
+  /* Reducir el margen del contenedor del avatar */
+  .hero-visual { flex: 0 0 auto; padding-bottom: 0; margin-bottom: 0; }
+  .hero-modern { gap: 1rem !important; padding-top: 1rem; }
 }
 
 /* Contact Section — Direct Info Cards */
@@ -1969,7 +1971,7 @@ nav ul li a .nav-icon {
     box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
     position: relative;
     display: flex;
-    pointer-events: none;
+    /* NO pointer-events:none aquí — los botones deben ser clickeables */
   }
 
   /* El bloque deslizante (la luz del switch) */

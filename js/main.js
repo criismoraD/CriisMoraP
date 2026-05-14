@@ -319,9 +319,14 @@
       }
 
       draw() {
+        const palette = [
+          'rgba(56, 189, 248, 0.45)',
+          'rgba(167, 139, 250, 0.35)',
+          'rgba(10, 150, 200, 0.35)'
+        ];
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-        ctx.fillStyle = 'rgba(0, 255, 65, 0.4)';
+        ctx.fillStyle = this.color;
         ctx.fill();
       }
 
@@ -357,6 +362,12 @@
       }
     }
 
+    const PARTICLE_COLORS = [
+      'rgba(56, 189, 248, 0.45)',
+      'rgba(167, 139, 250, 0.35)',
+      'rgba(10, 150, 200, 0.35)'
+    ];
+
     function initParticles() {
       particles = [];
       let numParticles = (canvas.width * canvas.height) / 12000;
@@ -366,7 +377,9 @@
         let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
         let dx = (Math.random() - 0.5) * 0.8;
         let dy = (Math.random() - 0.5) * 0.8;
-        particles.push(new Particle(x, y, dx, dy, size));
+        const p = new Particle(x, y, dx, dy, size);
+        p.color = PARTICLE_COLORS[Math.floor(Math.random() * PARTICLE_COLORS.length)];
+        particles.push(p);
       }
     }
 
@@ -377,7 +390,7 @@
             + ((particles[a].y - particles[b].y) * (particles[a].y - particles[b].y));
           if (distance < (canvas.width / 10) * (canvas.height / 10)) {
             let opacityValue = 1 - (distance / 20000);
-            ctx.strokeStyle = 'rgba(0, 255, 65,' + opacityValue * 0.3 + ')';
+            ctx.strokeStyle = 'rgba(56, 189, 248,' + opacityValue * 0.2 + ')';
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(particles[a].x, particles[a].y);
